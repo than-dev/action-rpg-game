@@ -11,7 +11,7 @@ height = 4.0
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 164, 83 )
+position = Vector2( 0, -9 )
 texture = ExtResource( 2 )
 hframes = 60
 __meta__ = {
@@ -19,6 +19,5 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 164, 92 )
 rotation = -1.5708
 shape = SubResource( 1 )
