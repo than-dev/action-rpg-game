@@ -1,9 +1,9 @@
 # player
 extends KinematicBody2D
 
-const ACCELERATION = 10;
-const MAX_SPEED = 100;
-const FRICTION = 10;
+const ACCELERATION = 500;
+const MAX_SPEED = 80;
+const FRICTION = 500;
 
 # vector.zero = initial postion in scene vector (0, 0)
 var velocity = Vector2.ZERO;
@@ -18,16 +18,12 @@ func _physics_process(delta):
 
 	# if there is movement input
 	if(input_vector != Vector2.ZERO):		
-		# setting movement based on ACCELERATION and input;
-		velocity += input_vector * ACCELERATION * delta;
-		
-		# limiting movement based on MAX_SPEED
-		velocity = velocity.limit_length(MAX_SPEED * delta);
+		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta);
 	else:
 		# setting desaceleration when stop to input any movement
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta);
 		
 	# move
-	move_and_collide(velocity);
+	move_and_collide(velocity * delta);
 		
 	
