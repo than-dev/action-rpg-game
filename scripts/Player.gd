@@ -24,6 +24,6 @@ func _physics_process(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta);
 		
 	# move
-	move_and_collide(velocity * delta);
+	velocity = move_and_slide(velocity);
 		
 	
