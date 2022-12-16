@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://resources/Player/Player.png" type="Texture" id=2]
@@ -37,6 +37,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 36, 37, 38, 39 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
 
 [sub_resource type="Animation" id=27]
 resource_name = "attack-left"
@@ -52,6 +66,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 32, 33, 34, 35 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
 }
 
 [sub_resource type="Animation" id=28]
@@ -69,6 +97,20 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 24, 25, 26, 27 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
+}
 
 [sub_resource type="Animation" id=29]
 resource_name = "attack-up"
@@ -84,6 +126,20 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 28, 29, 30, 31 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_animation_finished"
+} ]
 }
 
 [sub_resource type="Animation" id=10]
@@ -222,6 +278,29 @@ tracks/0/keys = {
 "values": [ 8, 8, 9, 10, 11, 6 ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=30]
+animation = "attack-left"
+
+[sub_resource type="AnimationNodeAnimation" id=31]
+animation = "attack-down"
+
+[sub_resource type="AnimationNodeAnimation" id=32]
+animation = "attack-up"
+
+[sub_resource type="AnimationNodeAnimation" id=33]
+animation = "attack-right"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=34]
+blend_point_0/node = SubResource( 30 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 31 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 32 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 33 )
+blend_point_3/pos = Vector2( 1, 0 )
+blend_mode = 1
+
 [sub_resource type="AnimationNodeAnimation" id=13]
 animation = "idle left"
 
@@ -277,12 +356,18 @@ max_space = Vector2( 1, 1.1 )
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+
 [sub_resource type="AnimationNodeStateMachine" id=11]
+states/attack/node = SubResource( 34 )
+states/attack/position = Vector2( 69, 144 )
 states/idle/node = SubResource( 18 )
 states/idle/position = Vector2( 69, 71 )
 states/run/node = SubResource( 23 )
 states/run/position = Vector2( 227, 71 )
-transitions = [ "idle", "run", SubResource( 24 ), "run", "idle", SubResource( 25 ) ]
+transitions = [ "idle", "run", SubResource( 24 ), "run", "idle", SubResource( 25 ), "idle", "attack", SubResource( 35 ), "attack", "idle", SubResource( 36 ) ]
 start_node = "idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=12]
@@ -322,5 +407,6 @@ anims/attack-up = SubResource( 29 )
 tree_root = SubResource( 11 )
 anim_player = NodePath("../AnimationPlayer")
 parameters/playback = SubResource( 12 )
+parameters/attack/blend_position = Vector2( 0, 0 )
 parameters/idle/blend_position = Vector2( 0, -0.0172414 )
 parameters/run/blend_position = Vector2( -0.00168067, -0.0172414 )
