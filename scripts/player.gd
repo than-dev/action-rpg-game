@@ -62,7 +62,7 @@ func roll_state(delta: float):
 	print('rolling')
 	
 # set physics actions and behavior (exec each frame)
-func _process(delta):
+func _physics_process(delta):
 		match state:
 			MOVE:
 				move_state(delta);
