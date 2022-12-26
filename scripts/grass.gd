@@ -3,9 +3,6 @@ extends Node2D;
 # paths
 var grass_effect_scene_path = "res://scenes/effects/Grass-Effect.tscn";
 
-#func _process(_delta):
-#	create_grass_effect();
-
 func create_grass_effect():
 	# grass effect scene
 	var grass_effect = load(grass_effect_scene_path).instance();

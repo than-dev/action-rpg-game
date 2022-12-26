@@ -1,2 +1,2 @@
-﻿41373
-/home/nathan/Programs/Godot_v3.5.1-stable_mono_x11_64/godot
+﻿34315
+/home/nathan/Programs/Godot/godot
